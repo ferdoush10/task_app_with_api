@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_mp/ui/controllers/auth_controller.dart';
 import 'package:task_mp/ui/widget/body_background.dart';
-
 import 'package:task_mp/ui/widget/profile_summary_card.dart';
 
 class EditProfileScreen extends StatefulWidget {

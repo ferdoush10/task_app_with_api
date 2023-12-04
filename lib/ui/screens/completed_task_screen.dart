@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_mp/ui/widget/profile_summary_card.dart';
-import 'package:task_mp/ui/widget/task_item_card.dart';
 
 class CompltedTaskScreen extends StatefulWidget {
   const CompltedTaskScreen({super.key});
@@ -21,7 +20,9 @@ class _CompltedTaskScreenState extends State<CompltedTaskScreen> {
                 child: ListView.builder(
                     itemCount: 5,
                     itemBuilder: (context, index) {
-                      return const TaskItemCard();
+                      return null;
+
+                      //  return const TaskItemCard();
                     }))
           ],
         ),
