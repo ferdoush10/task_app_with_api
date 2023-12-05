@@ -15,7 +15,7 @@ class NetworkCaller {
       {Map<String, dynamic>? body, bool isLogin = false}) async {
     try {
       log(url);
-      log(body.toString());
+
       final Response response = await post(Uri.parse(url),
           body: jsonEncode(body),
           headers: {
@@ -23,9 +23,10 @@ class NetworkCaller {
             'token': AuthController.token.toString()
           });
       //this is consle print show reposne body and status code
-      log(response.headers.toString());
+      // log(response.headers.toString());
       log(response.statusCode.toString());
       log(response.body.toString());
+      log(body.toString());
 
       if (response.statusCode == 200) {
         return NetworkResponse(
@@ -58,16 +59,15 @@ class NetworkCaller {
   //Get API
   Future<NetworkResponse> getRequest(String url) async {
     try {
+      // log(url);
+      final Response response = await get(Uri.parse(url), headers: {
+        'Content-type': 'Application/json',
+        'token': AuthController.token.toString()
+      });
       log(url);
-      final Response response = await get(Uri.parse(url),
-          headers: {
-            'Content-type': 'Application/json',
-            'token': AuthController.token.toString()
-          });
-
-      log(response.headers.toString());
+      //log(response.headers.toString());
       log(response.statusCode.toString());
-      log(response.body.toString());
+      //  log(response.body.toString());
 
       if (response.statusCode == 200) {
         return NetworkResponse(
@@ -76,8 +76,8 @@ class NetworkCaller {
           statusCode: 200,
         );
       } else if (response.statusCode == 401) {
-          backToLogin();
-          
+        backToLogin();
+
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,

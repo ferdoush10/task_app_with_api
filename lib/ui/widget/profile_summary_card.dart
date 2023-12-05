@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:task_mp/ui/controllers/auth_controller.dart';
 
@@ -20,6 +23,8 @@ class ProfileSummaryCard extends StatefulWidget {
 class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
   @override
   Widget build(BuildContext context) {
+    // Uint8List imageBytes =
+    //     const Base64Decoder().convert(AuthController.user?.photo ?? '');
     return ListTile(
       onTap: () {
         if (widget.enabledOnTap) {
@@ -30,6 +35,9 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
         }
       },
       leading: const CircleAvatar(
+        // child: AuthController.user?.photo == null
+        //     ? const Icon(Icons.person)
+        //     : Image.memory(imageBytes),
         child: Icon(Icons.person),
       ),
       title: Text(

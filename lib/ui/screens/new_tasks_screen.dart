@@ -102,22 +102,41 @@ class _NewTasksScreenState extends State<NewTasksScreen> {
               replacement: const Center(
                 child: CircularProgressIndicator(),
               ),
-              child: ListView.builder(
-                  itemCount: taskListModel.taskList?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return TaskItemCard(
-                      task: taskListModel.taskList![index],
-                    );
-                  }),
-            ))
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  getNewTaskList();
+                },
+                child: ListView.builder(
+                    itemCount: taskListModel.taskList?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return TaskItemCard(
+                        task: taskListModel.taskList![index],
+                        onStatuschange: () {
+                          getNewTaskList();
+                        },
+                        showProgress: (inProgress) {
+                          getNewTaskInProgress = inProgress;
+                          if (mounted) {
+                            setState(() {});
+                          }
+                        },
+                      );
+                    }),
+              ),
+            )),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const AddNewTaskScreen();
-          }));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const AddNewTaskScreen();
+              },
+            ),
+          );
         },
         child: const Icon(Icons.add),
       ),
